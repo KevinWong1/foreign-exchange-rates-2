@@ -1,0 +1,35 @@
+* {
+    background-color:#dae1e7;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    width:100vw;
+    background-color:#142850;
+    min-height: 9vh;
+    font-size: 8rem;
+}
+
+.BarChart {
+    display:grid;
+    grid-template-columns: repeat(4, auto);
+    align-items: end;
+    height:80vh;
+    column-gap: 8px;
+    font-size: 5rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.BarChart-bar:hover {
+    background: #17406b;
+}
+
+.BarChart-bar {
+    border: 2px solid #1f66b3;
+    width: 100%;
+    background:#27496d;
+    transition: 0.3s;
+}
