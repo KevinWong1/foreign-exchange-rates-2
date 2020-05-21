@@ -14,7 +14,7 @@ h1 {
 
 .BarChart {
     display:grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(6, auto);
     align-items: end;
     height:80vh;
     column-gap: 8px;
@@ -32,4 +32,8 @@ h1 {
     width: 100%;
     background:#27496d;
     transition: 0.3s;
+}
+
+label, select {
+    font-size: 3rem;
 }
