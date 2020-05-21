@@ -11,7 +11,7 @@
 <body>
     <h1>Current Currency Rates</h1>
     <div class="middleSection">
-        <div class="date"></div> <label for="currencies">Base Currency:</label>
+        <div class="date"></div> <label for="currencies">Start by Selecting a Base Currency:</label>
         <select name="currencies" class="dropDown" id="currencies" onchange="setBarHeights(this);">
             <option>-------</option>
             <option value="EUR">EUR</option>
@@ -25,13 +25,13 @@
     </div>
 
     <span class="BarChart">
-        <div class="BarChart-bar BarChart-bar-CNY" onclick="remove('CNY')"></div>
-        <div class="BarChart-bar BarChart-bar-EUR" onclick="remove('EUR')"></div>
-        <div class="BarChart-bar BarChart-bar-USD" onclick="remove('USD')"></div>
-        <div class="BarChart-bar BarChart-bar-AUD" onclick="remove('AUD')"></div>
-        <div class="BarChart-bar BarChart-bar-GBP" onclick="remove('GBP')"></div>
-        <div class="BarChart-bar BarChart-bar-CAD" onclick="remove('CAD')"></div>
-        <div class="BarChart-bar BarChart-bar-HKD" onclick="remove('HKD')"></div>
+        <div class="BarChart-bar BarChart-bar-CNY" onclick="removeBar('CNY')"></div>
+        <div class="BarChart-bar BarChart-bar-EUR" onclick="removeBar('EUR')"></div>
+        <div class="BarChart-bar BarChart-bar-USD" onclick="removeBar('USD')"></div>
+        <div class="BarChart-bar BarChart-bar-AUD" onclick="removeBar('AUD')"></div>
+        <div class="BarChart-bar BarChart-bar-GBP" onclick="removeBar('GBP')"></div>
+        <div class="BarChart-bar BarChart-bar-CAD" onclick="removeBar('CAD')"></div>
+        <div class="BarChart-bar BarChart-bar-HKD" onclick="removeBar('HKD')"></div>
     </span>
 
     <button onclick="window.location.reload()">Reset</button>
