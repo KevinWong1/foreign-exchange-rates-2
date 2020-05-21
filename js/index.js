@@ -1,56 +1,73 @@
-let currencies = ['EUR', 'USD', 'AUD', 'GBP'];
+let currencies = {
+    EUR: {
+        currency: 'EUR',
+        symbol: '€'
+    },
+    USD: { currency: 'USD', symbol: '$' },
+    AUD: { currency: 'AUD', symbol: '$' },
+    GBP: { currency: 'GBP', symbol: '£' },
+    CAD: { currency: 'CAD', symbol: '$' },
+    HKD: { currency: 'HKD', symbol: '$' },
+    CNY: { currency: 'CNY', symbol: '¥' },
+}
 
-// let currencies = { EUR: { currency: EUR }, USD: { currency: USD }, AUD: { currency: AUD }, GBP: { currency: GBP }, }
+let selected = null;
 let url = 'https://api.exchangeratesapi.io/latest?base=USD'
-// doFetch()
+let highest = null;
 
-let base = "";
-function doFetch() {
+function getCurrencyRates() {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            for (currency of currencies) {
-                let output = document.querySelector('.BarChart-bar-' + currency);
-                // console.log(currency);
+            for (let [key, value] of Object.entries(currencies)) {
                 // a fix for missing EUR base in api
                 // https://api.exchangeratesapi.io/latest?base=EUR
-                if (data.rates[currency] === undefined) {
-                    output.textContent = " EUR 1.000";
+                let output = document.querySelector('.BarChart-bar-' + key);
+                if ((data.rates[key]) === undefined) {
+                    value.rate = 1.000;
+                    output.textContent = `${key} 1.000 €`;
                 } else {
-                    output.textContent = `${currency} ${data.rates[currency].toFixed(3)}`
+                    // add rate property to objects
+                    value.rate = data.rates[key];
+                    output.textContent = `${key} ${data.rates[key].toFixed(3)} ${currencies[key]['symbol']}`
                 }
-                // let p = document.createElement('div')
-                // p.textContent = data.rates[currency];
-                // output.appendChild(p);
             }
         });
 }
 
-function getBaseCurrency(select) {
-    base = select.value;
-    url = 'https://api.exchangeratesapi.io/latest?base=' + base;
-    doFetch()
+function setBarHeights(select) {
+    if (select.value) {
+        selected = select.value;
+    }
+    url = 'https://api.exchangeratesapi.io/latest?base=' + selected;
+    if (url !== 'https://api.exchangeratesapi.io/latest?base=undefined') {
+        getCurrencyRates();
+        renderWithHighest();
+        highest = null;
+    }
 };
 
+function remove(currency) {
+    let output = document.querySelector('.BarChart-bar-' + currency);
+    output.style.display = 'none';
+    delete currencies[currency];
+    setBarHeights(selected);
+};
 
-let x = { EUR: { currency: 'EURR' }, USD: { currency: 'USD' }, AUD: { currency: 'AUD' }, GBP: { currency: 'GBP' }, }
-
-for (let [key, value] of Object.entries(x)) {
-    // console.log(`${key}: ${value}`);
-    console.log(`${value.currency}`);
-    value.hi = 2;
-    for (let [keyy, valuee] of Object.entries(value)) {
-        // console.log(`${keyy}: ${valuee}`);
-        // console.log(key);
+function renderWithHighest() {
+    getCurrencyRates();
+    for (let [key, value] of Object.entries(currencies)) {
+        if (value.rate > highest) {
+            highest = value.rate;
+        }
+    }
+    for (let [key, value] of Object.entries(currencies)) {
+        let output = document.querySelector('.BarChart-bar-' + key);
+        let height = value.rate / highest * 700;
+        output.style.height = height + 'px';
     }
 }
-console.log(x);
 
-// let b = {
-//     t: { y: 1 },
-//     o: { y: 2 }
-// }
-
-// b.t.g = "3"
-
-// console.log(b);
+let date = document.querySelector('.date');
+let dateNow = new Date();
+date.textContent = dateNow;

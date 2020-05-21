@@ -9,26 +9,34 @@
 </head>
 
 <body>
-    <h1>Currency</h1>
-    <label for="currencies">Base Currency:</label>
-    <select name="currencies" id="currencies" onchange="getBaseCurrency(this);">
-        <option value="EUR">EUR</option>
-        <option value="USD" selected>USD</option>
-        <option value="AUD">AUD</option>
-        <option value="GBP">GBP</option>
-        <option value="CAD">CAD</option>
-        <option value="HKD">HKD</option>
-    </select></h2>
+    <h1>Current Currency Rates</h1>
+    <div class="middleSection">
+        <div class="date"></div> <label for="currencies">Base Currency:</label>
+        <select name="currencies" class="dropDown" id="currencies" onchange="setBarHeights(this);">
+            <option>-------</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="AUD">AUD</option>
+            <option value="GBP">GBP</option>
+            <option value="CAD">CAD</option>
+            <option value="HKD">HKD</option>
+            <option value="CNY">CNY</option>
+        </select></h2>
+    </div>
 
     <span class="BarChart">
-        <div class="BarChart-bar BarChart-bar-EUR"></div>
-        <div class="BarChart-bar BarChart-bar-USD"></div>
-        <div class="BarChart-bar BarChart-bar-AUD"></div>
-        <div class="BarChart-bar BarChart-bar-GBP"></div>
-        <div class="BarChart-bar BarChart-bar-CAD"></div>
-        <div class="BarChart-bar BarChart-bar-HKD"></div>
+        <div class="BarChart-bar BarChart-bar-CNY" onclick="remove('CNY')"></div>
+        <div class="BarChart-bar BarChart-bar-EUR" onclick="remove('EUR')"></div>
+        <div class="BarChart-bar BarChart-bar-USD" onclick="remove('USD')"></div>
+        <div class="BarChart-bar BarChart-bar-AUD" onclick="remove('AUD')"></div>
+        <div class="BarChart-bar BarChart-bar-GBP" onclick="remove('GBP')"></div>
+        <div class="BarChart-bar BarChart-bar-CAD" onclick="remove('CAD')"></div>
+        <div class="BarChart-bar BarChart-bar-HKD" onclick="remove('HKD')"></div>
     </span>
-    <script src="./js/indexx.js"></script>
+
+    <button onclick="window.location.reload()">Reset</button>
+    <script src=" ./js/index.js">
+    </script>
 </body>
 
 </html>
